@@ -1,8 +1,11 @@
 import './App.css';
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Gallery from './Components/Gallery.jsx';
 import SearchBar from './Components/SearchBar.jsx';
 import { DataContext } from './Context/DataContext'
+import AlbumView from './Components/AlbumView';
+import ArtistView from './Components/ArtistView';
 
 function App() {
   let [search, setSearch] = useState(''); 
@@ -34,11 +37,21 @@ function App() {
 
   return (
     <div className="App">
-      <SearchBar handleSearch={handleSearch}  /> 
       {message}
-      <DataContext.Provider value={data} >
-      <Gallery/> 
-      </DataContext.Provider>
+      <Router>
+        <Routes>
+          <Route path = "/" element = {
+            <DataContext.Provider value={data} >
+            <Fragment>
+              <SearchBar handleSearch={handleSearch}  /> 
+              <Gallery data={data} /> 
+            </Fragment>
+            </DataContext.Provider>
+          } />
+            <Route path="/album/:id" element={<AlbumView />} />
+            <Route path="/artist/:id" element={<ArtistView />} />  
+         </Routes>
+        </Router>
     </div>
   );
 }

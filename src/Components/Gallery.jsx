@@ -1,7 +1,9 @@
 import GalleryItem from './GalleryItem';
 
 export default function Galley(props) {
-    const display = props.data.map((item, index) => <GalleryItem item={item} index={index} />)
+    const data = props.data.result.read()
+
+    const display = data.map((item, index) => <GalleryItem item={item} key={index} />)
 
     return (
         <div>

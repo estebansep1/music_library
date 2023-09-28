@@ -10,24 +10,12 @@ function App() {
   let [data, setData] = useState(null);
   let [message] = useState('Search for Music!');
 
-  //const API_URL = 'https://itunes.apple.com/search?term='
 
   useEffect(() => {
     if (search) {
       document.title=`${search} Music`
       setData(fetchData(search))
       console.log(fetchData(search))
-    // const fetchData = async () => {
-    //   document.title = `${search} Music`;
-    //   const response = await fetch(API_URL + search)
-    //   const resData = await response.json()
-    //   if (resData.results.length) {
-    //     setData(resData.results)
-    //   }else {
-    //     setMessage('Not Found')
-    //   }
-    // }
-    // fetchData();
   }
 }, [search]); 
 
